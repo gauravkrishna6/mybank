@@ -14,6 +14,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
 import java.awt.Color;
+import java.awt.Font;
+import javax.swing.border.EtchedBorder;
+import java.awt.SystemColor;
 
 
 
@@ -29,39 +32,38 @@ public class HomePage extends JFrame {
 	 */
 	public static void main(String[] args) {
 		
-		//Login mylog = new Login();
-		//System.out.println(mylog.User_id);
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					HomePage frame = new HomePage();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
+		
 	}
 
 	/**
 	 * Create the frame.
 	 */
+	public HomePage() {
+		
+	}
+	
 	public HomePage(int id) {
 		//System.out.println(id);
 		db = new Database();
+		String custName = db.getName(id);
+		//System.out.println(det);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(250, 250, 600, 450);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(SystemColor.info);
+		contentPane.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblLoginPage = new JLabel("DashBoard");
-		lblLoginPage.setBounds(159, 56, 117, 15);
+		JLabel lblLoginPage = new JLabel("Welcome "+ custName.toUpperCase());
+		lblLoginPage.setFont(new Font("Dialog", Font.BOLD, 19));
+		lblLoginPage.setBounds(39, 65, 537, 32);
 		contentPane.add(lblLoginPage);
 		
-		JButton btnChekBal = new JButton("chek bal");
+		JButton btnChekBal = new JButton("Check Balance");
+		btnChekBal.setFont(new Font("Dialog", Font.BOLD, 20));
+		btnChekBal.setBackground(Color.BLUE);
 		btnChekBal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int balance = db.getBal(id);
@@ -70,8 +72,22 @@ public class HomePage extends JFrame {
                         JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
-		btnChekBal.setForeground(Color.GREEN);
-		btnChekBal.setBounds(126, 200, 200, 60);
+		btnChekBal.setForeground(Color.LIGHT_GRAY);
+		btnChekBal.setBounds(49, 177, 200, 60);
 		contentPane.add(btnChekBal);
+		
+		JButton btnTransferMoney = new JButton("Transfer Money");
+		btnTransferMoney.addActionListener(new ActionListener() {   //action for money transfer button
+			public void actionPerformed(ActionEvent arg0) {
+				Transfer mytrans = new Transfer(id);
+				mytrans.setVisible(true);
+			}
+		});
+		btnTransferMoney.setBounds(328, 180, 208, 59);
+		contentPane.add(btnTransferMoney);
+	}
+	
+	public int add (int a ,int b) {
+		return a+b;
 	}
 }

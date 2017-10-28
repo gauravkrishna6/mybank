@@ -45,6 +45,7 @@ public class Login extends JFrame {
 	 * Create the frame.
 	 */
 	public Login() {
+		getContentPane().setFont(new Font("Dialog", Font.BOLD, 18));
 				
 		db = new Database();
 		
@@ -53,26 +54,29 @@ public class Login extends JFrame {
 		setBounds(600, 250, 600, 500);
 		getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Bla Bla Bank...");
+		JLabel lblNewLabel = new JLabel("The Indian Bank...");
 		lblNewLabel.setForeground(Color.RED);
-		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblNewLabel.setBounds(228, 67, 176, 46);
+		lblNewLabel.setFont(new Font("Bitstream Vera Serif", Font.BOLD, 33));
+		lblNewLabel.setBounds(142, 67, 308, 46);
 		getContentPane().add(lblNewLabel);
 		
 		JLabel lblUsername = new JLabel("Username");
-		lblUsername.setBounds(97, 182, 103, 46);
+		lblUsername.setFont(new Font("Dialog", Font.BOLD, 20));
+		lblUsername.setBounds(97, 182, 125, 46);
 		getContentPane().add(lblUsername);
 		
 		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setBounds(97, 282, 97, 15);
+		lblPassword.setFont(new Font("Dialog", Font.BOLD, 22));
+		lblPassword.setBounds(97, 264, 125, 33);
 		getContentPane().add(lblPassword);
 		
 		textUsername = new JTextField();
-		textUsername.setBounds(290, 196, 114, 19);
+		textUsername.setBounds(290, 191, 183, 33);
 		getContentPane().add(textUsername);
 		textUsername.setColumns(10);
 		
 		JButton btnNewButton = new JButton("Login");
+		btnNewButton.setFont(new Font("Dialog", Font.BOLD, 18));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				char[] tmp_pwd = passwordField.getPassword();
@@ -92,11 +96,11 @@ public class Login extends JFrame {
 				
 			}
 		});
-		btnNewButton.setBounds(209, 382, 132, 25);
+		btnNewButton.setBounds(199, 365, 164, 46);
 		getContentPane().add(btnNewButton);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(290, 280, 114, 19);
+		passwordField.setBounds(290, 266, 183, 33);
 		getContentPane().add(passwordField);
 	}
 

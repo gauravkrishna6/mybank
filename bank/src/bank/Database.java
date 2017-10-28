@@ -3,8 +3,8 @@ import java.sql.*;
 public class Database {
 	
 	 Connection con;
-	 PreparedStatement pstLogin, pstGetBal;
-	 ResultSet rs;
+	 PreparedStatement pstLogin, pstGetDetail;
+	 ResultSet rs,rs1;
 	 
 	 
 	 Database(){
@@ -13,8 +13,8 @@ public class Database {
 			 
 			 //1.get a connection to database
 			 Connection Conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demo","gaurav","gaurav610");
-			 pstLogin = Conn.prepareStatement("SELECT * FROM account WHERE username = ? AND password = ?");
-			 pstGetBal = Conn.prepareStatement("SELECT *  FROM balance WHERE usr_id = ?");
+			 pstLogin = Conn.prepareStatement("SELECT * FROM login WHERE username = ? AND password = ?");
+			 pstGetDetail = Conn.prepareStatement("SELECT *  FROM accounts WHERE usr_id = ?");
 		 }
 		 catch (Exception e) {
 			 System.out.println(e);
@@ -46,14 +46,29 @@ public class Database {
 	 // returns the balance in the account of the user
 	 public int getBal(int id) {
 		 try {
-			 pstGetBal.setInt(1, id);
-			 rs = pstGetBal.executeQuery();
+			 pstGetDetail.setInt(1, id);
+			 rs = pstGetDetail.executeQuery();
 			 if(rs.next()) return rs.getInt("acc_balance");
 		 }
 		 catch (Exception e) {
 			 System.out.println("datbase error");
 		 }
 		return -2;
+	 }
+	 
+	 public String getName(int id) {
+		 try {
+			 pstGetDetail.setInt(1,id);
+			 rs1 = pstGetDetail.executeQuery();
+			 if(rs1.next())
+			 return rs1.getString("name");
+			 else return null;
+		 }
+		 catch(Exception e) {
+			 System.out.println(e);
+			 return null;
+		 }
+		
 	 }
 
 }
